@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Números</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .numero-container {
+            display: grid;
+            grid-template-columns: repeat(15, 60px); /* 15 números por linha */
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .numero {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .numero.selecionado {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selecione os Números</h1>
+        <div class="numero-container" id="numero-container">
+            <!-- Os números de 1 a 75 serão gerados aqui pelo JS -->
+        </div>
+        <button onclick="limparSelecao()">Limpar Seleção</button>
+    </div>
+
+    <script>
+        // Função para gerar os números de 1 a 75
+        function gerarNumeros() {
+            const container = document.getElementById('numero-container');
+
+            for (let i = 1; i <= 75; i++) {
+                const numeroDiv = document.createElement('div');
+                numeroDiv.classList.add('numero');
+                numeroDiv.textContent = i;
+                numeroDiv.onclick = () => selecionarNumero(numeroDiv);
+                container.appendChild(numeroDiv);
+            }
+        }
+
+        // Função para selecionar e mudar a cor do número
+        function selecionarNumero(numeroDiv) {
+            numeroDiv.classList.toggle('selecionado'); // Alterna a classe 'selecionado' para mudar a cor
+        }
+
+        // Função para limpar a seleção de números
+        function limparSelecao() {
+            const numerosSelecionados = document.querySelectorAll('.numero.selecionado');
+            numerosSelecionados.forEach(num => num.classList.remove('selecionado'));
+        }
+
+        // Inicializa os números quando a página carregar
+        window.onload = gerarNumeros;
+    </script>
+</body>
+</html>
